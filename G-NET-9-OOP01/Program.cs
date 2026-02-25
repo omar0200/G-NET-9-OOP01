@@ -1,15 +1,48 @@
-﻿namespace G_NET_9_OOP01
+﻿using System.Diagnostics;
+using System.Net.Sockets;
+using G_NET_9_OOP01;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace G_NET_9_OOP01
 {
-    struct X
+    public enum TicketType { Standard, VIP, IMAX }
+
+    struct Seat
     {
-        public int a;
-        public int b;
+        public char row;
+        public int number;
+
+        public Seat(char row, int number)
+        {
+            this.row = row;
+            this.number = number;
+        }
+
+        public override string ToString() => $"{row}{number}";
     }
-    class Y
+
+    class Ticket
     {
-        public int a = 0;
-        public int b = 1;
-        private int c;
+        private int price;
+        public string MovieName;
+        public TicketType type;
+        public Seat Seat;
+
+        public Ticket(string movieName, TicketType type, Seat seat, int price)
+        {
+            MovieName = movieName;
+            this.type = type;
+            Seat = seat;
+            this.price = price;
+        }
+
+        public Ticket(string movieName)
+            : this(movieName, TicketType.Standard, new Seat('A', 1), 50)
+        { }
+
+        public override string ToString()
+            => $"{MovieName} | {type} | Seat {Seat} | Price {price}";
+
     }
 
     internal class Program
@@ -55,8 +88,19 @@
             #endregion
             #region Question 4
             //A class library is a project in C# that contains reusable classes, and methods without a Main()
-            //method so it does not run by itself
+            //method so it does not run by itself, we use it for Code Reusability 
             #endregion
+
+            #region Question 5
+            Ticket t1 = new Ticket("Bo7a");
+            Console.WriteLine(t1);
+
+            Ticket t2 = new Ticket("see", TicketType.IMAX, new Seat('C', 7), 120);
+            Console.WriteLine(t2);
+            #endregion
+
+
         }
     }
+  
 }
