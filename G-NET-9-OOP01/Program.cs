@@ -53,6 +53,10 @@
             #region Question 3
             //open new project as class library and add reference to it in this project, then we can create an instance of the class in the class library and access its members.
             #endregion
+            #region Question 4
+            //A class library is a project in C# that contains reusable classes, and methods without a Main()
+            //method so it does not run by itself
+            #endregion
         }
     }
 }
