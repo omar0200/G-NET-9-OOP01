@@ -7,8 +7,9 @@
     }
     class Y
     {
-        public int a;
-        public int b;
+        public int a = 0;
+        public int b = 1;
+        private int c;
     }
 
     internal class Program
@@ -42,6 +43,13 @@
             //struct assign values meanwhile class assign reference,
             //so when we change the value of x2.a it does not affect x1.a but when we change the value of y2.a it affects y1.a because they are reference type.
             #endregion
+
+            #region Question 2
+            Y y3 = new Y(); 
+            Console.WriteLine($"y3: {y3.a}, {y3.b}, {y3.c} ");
+            //we cannot access the private member c of class Y, so we will get an error if we try to access it.
+            #endregion
+
         }
     }
 }
