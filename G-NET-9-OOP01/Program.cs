@@ -5,47 +5,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace G_NET_9_OOP01
 {
-    public enum TicketType { Standard, VIP, IMAX }
-
-    struct Seat
-    {
-        public char row;
-        public int number;
-
-        public Seat(char row, int number)
-        {
-            this.row = row;
-            this.number = number;
-        }
-
-        public override string ToString() => $"{row}{number}";
-    }
-
-    class Ticket
-    {
-        private int price;
-        public string MovieName;
-        public TicketType type;
-        public Seat Seat;
-
-        public Ticket(string movieName, TicketType type, Seat seat, int price)
-        {
-            MovieName = movieName;
-            this.type = type;
-            Seat = seat;
-            this.price = price;
-        }
-
-        public Ticket(string movieName)
-            : this(movieName, TicketType.Standard, new Seat('A', 1), 50)
-        { }
-
-        public override string ToString()
-            => $"{MovieName} | {type} | Seat {Seat} | Price {price}";
-
-    }
-
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
 
@@ -92,11 +52,37 @@ namespace G_NET_9_OOP01
             #endregion
 
             #region Question 5
-            Ticket t1 = new Ticket("Bo7a");
-            Console.WriteLine(t1);
 
-            Ticket t2 = new Ticket("see", TicketType.IMAX, new Seat('C', 7), 120);
-            Console.WriteLine(t2);
+            Console.Write("Movie Name: ");
+            string movie = Console.ReadLine();
+
+            Console.Write("Ticket Type (0=Standard, 1=VIP, 2=IMAX): ");
+            TicketType type = (TicketType)int.Parse(Console.ReadLine());
+
+            Console.Write("Seat Row: ");
+            char row = char.Parse(Console.ReadLine());
+
+            Console.Write("Seat Number: ");
+            int number = int.Parse(Console.ReadLine());
+
+            Console.Write("Price: ");
+            int price = int.Parse(Console.ReadLine());
+
+            Ticket ticket = new Ticket(movie, type, new Seat(row, number), price);
+
+            Console.Write("Tax Percentage (e.g. 0.14): ");
+            double tax = double.Parse(Console.ReadLine());
+
+            Console.Write("Discount: ");
+            double discount = double.Parse(Console.ReadLine());
+
+            ticket.ApplyDiscount(discount);
+
+            Console.WriteLine();
+            Console.WriteLine("===== Ticket =====");
+            ticket.PrintTicket();
+
+            Console.WriteLine($"Total After Tax = {ticket.CalcTotal(tax)}");
             #endregion
 
 
